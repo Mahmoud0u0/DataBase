@@ -357,7 +357,11 @@
 
 --Restore Database HR_Database from disk ='c:\HR_Database.bak';
 
+--Restore Database Shop_Database from disk ='c:\Shop_Database.bak';
+
 ---------------------------------------------------------------------
+---------------------------------------------------------------------
+
 
 --USE HR_Database;
 
@@ -784,15 +788,128 @@
 
 
 --------------------------------------------------------------------------------------------------------------------
-------------------------------------------------- DELETE Statement -------------------------------------------------
+------------------------------------------------- (Inner) Join -----------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------
 
 
+-- Join and Inner Join are the same
+
+--USE Shop_Database;
+
+--select * from Customers;
+
+--select * from Orders;
 
 
+--SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+--FROM Customers 
+--JOIN Orders 
+--ON Customers.CustomerID = Orders.CustomerID;
 
+
+--SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+--FROM Customers 
+--Inner JOIN Orders 
+--ON Customers.CustomerID = Orders.CustomerID;
+
+
+--------------------------------------------------------------------------------------------------
+
+----This code for HR_Database
+
+--USE HR_Database;
+
+----Inner Join two Tables
+--SELECT Employees.ID, Employees.FirstName, Employees.LastName, Departments.Name as DeptName
+--FROM Employees 
+--INNER JOIN Departments 
+--ON Employees.DepartmentID = Departments.ID
+
+
+----Inner joind with where
+--SELECT Employees.ID, Employees.FirstName, Employees.LastName, Departments.Name as DeptName
+--FROM Employees
+--INNER JOIN
+--Departments ON Employees.DepartmentID = Departments.ID
+--where Departments.Name = 'IT';
+
+
+----Inner Join Three Tables
+--SELECT Employees.ID, Employees.FirstName, Employees.LastName, Departments.Name as DeptName, Countries.Name AS CountryName
+--FROM Employees 
+--INNER JOIN Departments 
+--ON Employees.DepartmentID = Departments.ID 
+--INNER JOIN
+--Countries ON Employees.CountryID = Countries.ID
+
+						 
+----Inner Join Three Tables with where
+--SELECT Employees.ID, Employees.FirstName, Employees.LastName, Departments.Name as DeptName, Countries.Name AS CountryName
+--FROM Employees 
+--INNER JOIN Departments
+--ON Employees.DepartmentID = Departments.ID
+--INNER JOIN Countries
+--ON Employees.CountryID = Countries.ID
+--where Countries.Name = 'USA';
 
 
 --------------------------------------------------------------------------------------------------------------------
-------------------------------------------------- DELETE Statement -------------------------------------------------
+-------------------------------------------- LEFT (OUTER) JOIN -----------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------
+
+
+--USE Shop_Database;
+
+----Left Join and Left Outer Join are the same.
+
+----Left Join: gets all data from table customers and only matched data from table orders
+--SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+--FROM Customers 
+--Left JOIN Orders 
+--ON Customers.CustomerID = Orders.CustomerID;
+
+
+--SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+--FROM Customers 
+--Left Outer JOIN Orders 
+--ON Customers.CustomerID = Orders.CustomerID;
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------- Right (Outer) Join + Full (Outer) Join -------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+
+USE Shop_Database;
+
+--Inner Join
+SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+FROM Customers
+INNER JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID
+
+
+--Left Join
+SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+FROM Customers
+LEFT OUTER JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID
+
+
+--Right Join
+SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+FROM Customers 
+RIGHT OUTER JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID
+
+
+--Full Join
+SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+FROM Customers 
+FULL OUTER JOIN Orders
+ON Customers.CustomerID = Orders.CustomerID
+
+
+--------------------------------------------------------------------------------------------------------------------
+---------------------------------------                                      ---------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
