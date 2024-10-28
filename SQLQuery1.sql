@@ -879,34 +879,34 @@
 --------------------------------------------------------------------------------------------------------------------
 
 
-USE Shop_Database;
+--USE Shop_Database;
 
---Inner Join
-SELECT Customers.CustomerID, Customers.Name, Orders.Amount
-FROM Customers
-INNER JOIN Orders
-ON Customers.CustomerID = Orders.CustomerID
-
-
---Left Join
-SELECT Customers.CustomerID, Customers.Name, Orders.Amount
-FROM Customers
-LEFT OUTER JOIN Orders
-ON Customers.CustomerID = Orders.CustomerID
+----Inner Join
+--SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+--FROM Customers
+--INNER JOIN Orders
+--ON Customers.CustomerID = Orders.CustomerID
 
 
---Right Join
-SELECT Customers.CustomerID, Customers.Name, Orders.Amount
-FROM Customers 
-RIGHT OUTER JOIN Orders
-ON Customers.CustomerID = Orders.CustomerID
+----Left Join
+--SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+--FROM Customers
+--LEFT OUTER JOIN Orders
+--ON Customers.CustomerID = Orders.CustomerID
 
 
---Full Join
-SELECT Customers.CustomerID, Customers.Name, Orders.Amount
-FROM Customers 
-FULL OUTER JOIN Orders
-ON Customers.CustomerID = Orders.CustomerID
+----Right Join
+--SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+--FROM Customers 
+--RIGHT OUTER JOIN Orders
+--ON Customers.CustomerID = Orders.CustomerID
+
+
+----Full Join
+--SELECT Customers.CustomerID, Customers.Name, Orders.Amount
+--FROM Customers 
+--FULL OUTER JOIN Orders
+--ON Customers.CustomerID = Orders.CustomerID
 
 
 --------------------------------------------------------------------------------------------------------------------
