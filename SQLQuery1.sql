@@ -910,6 +910,262 @@
 
 
 --------------------------------------------------------------------------------------------------------------------
----------------------------------------                                      ---------------------------------------
+------------------------------------------- CREATE VIEW Statement --------------------------------------------------
 --------------------------------------------------------------------------------------------------------------------
 
+
+--USE HR_Database;
+
+--CREATE VIEW ActiveEmployees AS
+--SELECT * FROM Employees WHERE ExitDate IS NULL
+
+--CREATE VIEW ResignedEmployees AS
+--SELECT * FROM Employees WHERE ExitDate IS NOT NULL
+
+--SELECT * FROM ActiveEmployees;
+
+
+--------------------------------------------------------------------------------------------------------------------
+---------------------------------------------- EXISTS Operator -----------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+
+--USE Shop_Database;
+
+
+--The EXISTS operator returns TRUE or FALSE
+
+
+--select X = 'yes' where  exists(
+
+--	select * from Orders
+--	where customerID = 3 and Amount < 600
+--	)
+
+
+--select * from Customers T1 where exists(
+
+--	select * from Orders
+--	where customerID = T1.CustomerID and Amount < 600
+--	)
+
+
+----More optimized and faster
+--select * from Customers T1 where exists(
+
+--	select top 1 * from Orders
+--	where customerID = T1.CustomerID and Amount < 600
+--	)
+
+
+----More optimized and faster
+--select * from Customers T1 where exists(
+
+--	select top 1 R = 'Y'  from Orders
+--	where customerID = T1.CustomerID and Amount < 600
+--	)
+
+
+--------------------------------------------------------------------------------------------------------------------
+---------------------------------------------- UNION Operator ------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+--USE HR_Database;
+
+--select * from ActiveEmployees
+
+--select * from ResignedEmployees
+
+
+--select * from ActiveEmployees
+--Union
+--select * from ResignedEmployees
+
+----this will remove the redundancy from the resultset (distinct results only)
+--select * from Departments
+--union 
+--select * from Departments;
+
+----this will append data regardeless of any redundancy
+--select * from Departments
+--union ALL
+--select * from Departments;
+
+
+--------------------------------------------------------------------------------------------------------------------
+---------------------------------------------- CASE Expression -----------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+
+--select ID, FirstName, LastName, GendorTitle =
+--CASE
+--    WHEN Gendor = 'M' THEN 'Male'
+--    WHEN Gendor = 'F' THEN 'Female'
+--    ELSE 'Unknown'
+--END
+
+--from Employees
+
+------------------------------------------------------
+
+--select ID, FirstName, LastName,  GendorTitle =
+--CASE
+--    WHEN Gendor = 'M' THEN 'Male'
+--    WHEN Gendor = 'F' THEN 'Female'
+--    ELSE 'Unknown'
+--END,
+
+--Status =
+--CASE
+--    WHEN ExitDate is null THEN 'Active'
+--    WHEN Gendor is Not null THEN 'Resigned'
+--END
+--from Employees
+
+-------------------------------------------------------
+
+--select ID, FirstName, LastName,MonthlySalary,
+
+--NewSalaryToBe =
+--CASE
+--    WHEN Gendor='M' THEN MonthlySalary * 1.1
+--    WHEN Gendor='F' THEN MonthlySalary * 1.15
+   
+--END
+--from Employees
+
+
+--------------------------------------------------------------------------------------------------------------------
+-------------------------------------------- Create Constraints ----------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+
+--NOT NULL
+--UNIQUE
+--PRIMARY KEY
+--FOREIGN KEY 
+--REFERENCES
+--DEFAULT
+--CHECK
+
+
+
+--CREATE TABLE table_name (
+--   column1 datatype constraint,
+--   column2 datatype constraint,
+--   column3 datatype constraint,
+--   ....
+--);
+
+
+------------------------------------------------------
+--1--NOT NULL----
+
+--CREATE TABLE Persons (
+--   ID int NOT NULL,
+--   LastName varchar(255) NOT NULL,
+--   FirstName varchar(255),
+--   Age int,
+--    CONSTRAINT PK_Person PRIMARY KEY (ID,LastName)
+--);
+
+
+------------------------------------------------------
+--2--DEFAULT----
+
+--CREATE TABLE Orders (
+--   ID int NOT NULL,
+--   OrderNumber int NOT NULL,
+--   OrderDate date DEFAULT GETDATE()
+--);
+
+--CREATE TABLE Persons (
+--   ID int NOT NULL,
+--   LastName varchar(255) NOT NULL,
+--   FirstName varchar(255),
+--   Age int,
+--   City varchar(255) DEFAULT 'Amman'
+--);
+
+--ALTER TABLE Persons
+--ADD CONSTRAINT df_City
+--DEFAULT 'Amman' FOR City;
+
+--ALTER TABLE Persons
+--DROP Constraint  df_City;
+
+------------------------------------------------------
+--3--CHECK----
+
+--CREATE TABLE Persons (
+--   ID int NOT NULL,
+--   LastName varchar(255) NOT NULL,
+--   FirstName varchar(255),
+--   Age int CHECK (Age>=18)
+--);
+
+--CREATE TABLE Persons (
+--   ID int NOT NULL,
+--   LastName varchar(255) NOT NULL,
+--   FirstName varchar(255),
+--   Age int,
+--   City varchar(255),
+--    CONSTRAINT CHK_Person CHECK (Age>=18 AND City='Amman')
+--);
+
+--ALTER TABLE Persons
+--DROP CONSTRAINT CHK_Person;
+
+
+------------------------------------------------------
+--4--UNIQUE----
+
+--CREATE TABLE Persons (
+--   ID int NOT NULL UNIQUE,
+--   LastName varchar(255) NOT NULL,
+--   FirstName varchar(255),
+--   Age int
+--);
+
+--CREATE TABLE Persons (
+--   ID int NOT NULL,
+--   LastName varchar(255) NOT NULL,
+--   FirstName varchar(255),
+--   Age int,
+--    CONSTRAINT UC_Person UNIQUE (ID,LastName)
+--);
+
+--ALTER TABLE Persons
+--ADD UNIQUE (ID);
+
+--ALTER TABLE Persons
+--ADD CONSTRAINT UC_Person UNIQUE (ID,LastName);
+
+--ALTER TABLE Persons
+--DROP CONSTRAINT UC_Person;
+
+
+--------------------------------------------------------------------------------------------------------------------
+------------------------------------------- CREATE INDEX Statement -------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+
+
+--CREATE INDEX index_name
+--ON table_name (column1, column2, ...);
+
+--CREATE UNIQUE INDEX index_name
+--ON table_name (column1, column2, ...);
+
+
+--CREATE INDEX idx_lastname
+--ON Persons (LastName);
+
+--CREATE INDEX idx_pname
+--ON Persons (LastName, FirstName);
+
+--DROP INDEX table_name.index_name;
+
+
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------
